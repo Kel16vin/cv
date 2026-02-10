@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Kelvin Akampa | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981', // Green
+                        secondary: '#3b82f6', // Blue
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 4s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div
+            class="absolute top-0 -left-4 w-72 h-72 bg-primary opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob">
+        </div>
+        <div
+            class="absolute top-0 -right-4 w-72 h-72 bg-secondary opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-8 left-20 w-72 h-72 bg-green-400 opacity-20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 glass shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <span
+                    class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">J.K.A</span>
+
+                <div class="hidden md:flex space-x-8 font-medium">
+                    <a href="#home" class="hover:text-primary transition">Home</a>
+                    <a href="#about" class="hover:text-primary transition">About</a>
+                    <a href="#skills" class="hover:text-primary transition">Skills</a>
+                    <a href="#experience" class="hover:text-primary transition">Experience</a>
+                    <a href="#contact" class="hover:text-primary transition">Contact</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                    <a href="mailto:jkakampa@gmail.com"
+                        class="bg-gradient-to-r from-primary to-secondary text-white px-5 py-2 rounded-full font-semibold hover:shadow-lg transition transform hover:scale-105">Hire
+                        Me</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-primary font-bold tracking-widest uppercase text-sm mb-4">Software Developer &
+                    Mathematician</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+                    Hi, I'm <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">John
+                        Kelvin Akampa</span>
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                    I am a skilled programmer with experience in various languages including but not limited to Python,
+                    C++, and Java. My commitment to ensuring client happiness drives high-quality results.
+                    [cite: 69]
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button
+                        class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-opacity-90 transition shadow-lg shadow-primary/20">Download
+                        CV</button>
+                    <a href="#experience"
+                        class="border-2 border-secondary text-secondary px-8 py-3 rounded-xl font-bold hover:bg-secondary hover:text-white transition">View
+                        Work</a>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-primary rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-spin-slow">
+                    </div>
+
+                    <div
+                        class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-2xl">
+                        <img src="profile.jpg" alt="John Kelvin Akampa" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white dark:bg-slate-800/50">
+        <div class="max-w-5xl mx-auto px-6 reveal">
+            <h2 class="text-3xl font-bold mb-12 text-center">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="glass p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-primary mb-4 italic">"Promoting computer literacy in society.</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                        I specialize in the System Development Lifecycle, leveraging collaboration with cross-functional
+                        teams to achieve great results.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Based in Kampala, Uganda, I am a graduate from Makerere University with a
+                        degree in Computer Science and Mathematics.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 glass rounded-xl">
+                        <i class="fas fa-graduation-cap text-secondary text-2xl"></i>
+                        <div>
+                            <p class="font-bold">Education</p>
+                            <p class="text-sm text-slate-500">B.Sc. Computer Science & Mathematics</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 glass rounded-xl">
+                        <i class="fas fa-language text-primary text-2xl"></i>
+                        <div>
+                            <p class="font-bold">Languages </p>
+                            <p class="text-sm text-slate-500">English, French, Luganda, Runyakitara</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">Technical Expertise</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass p-6 rounded-2xl text-center hover:scale-105 transition reveal">
+                    <div
+                        class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary text-2xl">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h4 class="font-bold">Python</h4>
+                    <div class="mt-4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div class="skill-bar h-full bg-primary" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-2xl text-center hover:scale-105 transition reveal">
+                    <div
+                        class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary text-2xl">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4 class="font-bold"></h4>
+                    <div class="mt-4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div class="skill-bar h-full bg-secondary" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-2xl text-center hover:scale-105 transition reveal">
+                    <div
+                        class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-2xl">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4 class="font-bold">C++</h4>
+                    <div class="mt-4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div class="skill-bar h-full bg-green-500" data-width="80%"></div>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-2xl text-center hover:scale-105 transition reveal">
+                    <div
+                        class="w-16 h-16 bg-blue-400/10 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-400 text-2xl">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h4 class="font-bold">Cloud Platforms</h4>
+                    <div class="mt-4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div class="skill-bar h-full bg-blue-400" data-width="75%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 flex flex-wrap justify-center gap-4 reveal">
+                <span class="px-4 py-2 glass rounded-full text-sm font-medium">Data Structures</span>
+                <span class="px-4 py-2 glass rounded-full text-sm font-medium">Algorithms</span>
+                <span class="px-4 py-2 glass rounded-full text-sm font-medium">Team Collaboration</span>
+                <span class="px-4 py-2 glass rounded-full text-sm font-medium">Critical Thinking</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-slate-100 dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">Work Experience</h2>
+            <div class="space-y-8">
+                <div class="relative pl-8 border-l-2 border-primary reveal">
+                    <div class="absolute -left-2.5 top-0 w-5 h-5 bg-primary rounded-full"></div>
+                    <div class="glass p-6 rounded-2xl">
+                        <span class="text-primary font-bold text-sm">April 2025 - Present</span>
+                        <h3 class="text-xl font-bold">Volunteer ICT Support</h3>
+                        <p class="text-slate-500 font-medium mb-4">Makerere University, Directorate Of ICT Support
+                        </p>
+                        <ul class="list-disc list-inside text-sm space-y-2 text-slate-600 dark:text-slate-400">
+                            <li>Helping students use systems like ACMIS Student portal and MUELE. </li>
+                            <li>Supporting staff with Human Resource Management System (E-HRMS). </li>
+                            <li>Registering staff members in the Biometrics system.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 border-l-2 border-secondary reveal">
+                    <div class="absolute -left-2.5 top-0 w-5 h-5 bg-secondary rounded-full"></div>
+                    <div class="glass p-6 rounded-2xl">
+                        <span class="text-secondary font-bold text-sm">Dec 2024 - March 2025 </span>
+                        <h3 class="text-xl font-bold">Web Developer</h3>
+                        <p class="text-slate-500 font-medium mb-4">Next Step HR Career Services </p>
+                        <ul class="list-disc list-inside text-sm space-y-2 text-slate-600 dark:text-slate-400">
+                            <li>Creating, designing, and maintaining the company website.</li>
+                            <li>Ensuring the website was running smoothly through consistent data collection.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+            <div class="reveal">
+                <h2 class="text-3xl font-bold mb-8">Let's Connect</h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">
+                    Open for opportunities in software development, ICT support, and data analysis.
+                </p>
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:jkakampa@gmail.com" class="hover:text-primary transition">jkakampa@gmail.com
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="tel:+256788466934" class="hover:text-secondary transition">+256 788 466 934 </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <a href="https://wa.me/256788466934" target="_blank"
+                            class="hover:text-green-500 transition">WhatsApp: +256 788 466 934</a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center text-orange-500">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p>Kajjansi, Kampala, Uganda </p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="glass p-8 rounded-3xl space-y-4 reveal">
+                <input type="text" placeholder="Your Name"
+                    class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition">
+                <input type="email" placeholder="Your Email"
+                    class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition">
+                <textarea rows="4" placeholder="Your Message"
+                    class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition"></textarea>
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 rounded-xl hover:shadow-xl transition transform active:scale-95">Send
+                    Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center border-t border-slate-200 dark:border-slate-800">
+        <p class="text-sm text-slate-500">© 2026 John Kelvin Akampa. Built with Tailwind CSS.</p>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+        });
+
+        // Scroll Reveal Animation
+        const reveals = document.querySelectorAll('.reveal');
+        const skillBars = document.querySelectorAll('.skill-bar');
+
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                if (revealTop < triggerBottom) {
+                    reveal.classList.add('active');
+                }
+            });
+
+            // Skill bars animation
+            skillBars.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                if (barTop < triggerBottom) {
+                    bar.style.width = bar.getAttribute('data-width');
+                    bar.style.transition = 'width 1.5s ease-in-out';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+
+</html>
