@@ -319,12 +319,12 @@
                 </div>
             </div>
 
-            <form class="glass p-8 rounded-3xl space-y-4 reveal">
-                <input type="text" placeholder="Your Name"
+            <form id="contact-form" class="glass p-8 rounded-3xl space-y-4 reveal">
+                <input type="text" id="user-name" placeholder="Your Name"
                     class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition">
-                <input type="email" placeholder="Your Email"
+                <input type="email" id="user-email" placeholder="Your Email"
                     class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition">
-                <textarea rows="4" placeholder="Your Message"
+                <textarea rows="4" id="user-message" placeholder="Your Message"
                     class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition"></textarea>
                 <button type="submit"
                     class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 rounded-xl hover:shadow-xl transition transform active:scale-95">Send
@@ -375,6 +375,37 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
+
+        // WhatsApp Contact Form
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('user-name').value.trim();
+            const email = document.getElementById('user-email').value.trim();
+            const message = document.getElementById('user-message').value.trim();
+
+            // WhatsApp number
+            const phoneNumber = '256788466934';
+
+            // Check if any field has information
+            if (name || email || message) {
+                // Create WhatsApp message with the provided information
+                const whatsappMessage = `Hello! My name is ${name}.\nEmail: ${email}\n\nMessage: ${message}`;
+
+                // Encode the message for URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+
+                // Open WhatsApp with pre-filled message
+                window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            } else {
+                // If form is empty, just open WhatsApp without pre-filled message
+                window.open(`https://wa.me/${phoneNumber}`, '_blank');
+            }
+
+            // Clear the form
+            contactForm.reset();
+        });
     </script>
 </body>
 
