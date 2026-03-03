@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Kelvin Akampa | Portfolio</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -101,6 +102,7 @@
                     <a href="#about" class="hover:text-primary transition">About</a>
                     <a href="#skills" class="hover:text-primary transition">Skills</a>
                     <a href="#experience" class="hover:text-primary transition">Experience</a>
+                    <a href="#documents" class="hover:text-primary transition">Documents</a>
                     <a href="#contact" class="hover:text-primary transition">Contact</a>
                 </div>
 
@@ -166,7 +168,7 @@
                         teams to achieve great results.
                     </p>
                     <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                        Based in Kampala, Uganda, I am a graduate from Makerere University with a
+                        Based in Kampala, Uganda, I am a graduate from Makerere University with a bachelor's
                         degree in Computer Science and Mathematics.
                     </p>
                 </div>
@@ -279,6 +281,70 @@
         </div>
     </section>
 
+    <section id="documents" class="py-20 bg-white dark:bg-slate-800/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-4 text-center reveal">Documents & Certificates</h2>
+            <p class="text-center text-slate-600 dark:text-slate-400 mb-12 reveal">View my CV, academic results, and professional certificates</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 reveal max-w-2xl mx-auto">
+                <!-- CV Document -->
+                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="cv">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary text-3xl">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Curriculum Vitae</h3>
+                    <p class="text-sm text-slate-500 mb-4">My professional CV and experience</p>
+                    <button type="button" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition" onclick="openDocumentModal(this.parentElement)">View PDF</button>
+                </div>
+
+                <!-- Academic Results -->
+                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="results">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary text-3xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Academic Results</h3>
+                    <p class="text-sm text-slate-500 mb-4">University transcripts and grades</p>
+                    <button type="button" class="bg-secondary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition" onclick="openDocumentModal(this.parentElement)">View PDF</button>
+                </div>
+            </div>
+
+            <!-- Certificates Section -->
+            <div>
+                <h3 class="text-2xl font-bold mb-8 text-center reveal">Professional Certificates</h3>
+                <div id="certificates-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                    <!-- Certificates will be populated here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Modal -->
+    <div id="document-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-slate-200 dark:border-slate-700">
+                <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                <button onclick="closeDocumentModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body - PDF Viewer -->
+            <div class="flex-1 overflow-y-auto">
+                <iframe id="pdf-viewer" src="" class="w-full h-full" style="min-height: 500px;"></iframe>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <p id="modal-description" class="text-sm text-slate-600 dark:text-slate-400"></p>
+                <a id="download-link" href="" download class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition flex items-center space-x-2">
+                    <i class="fas fa-download"></i>
+                    <span>Download PDF</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <section id="contact" class="py-20">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
             <div class="reveal">
@@ -375,6 +441,110 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
+
+        // Document Modal Functions
+        const documentData = {
+            cv: {
+                title: 'Curriculum Vitae',
+                description: 'My professional CV',
+                url: 'cv.pdf'
+            },
+            results: {
+                title: 'Academic Results',
+                description: 'University transcripts and grades',
+                url: 'results.pdf'
+            }
+        };
+
+        // Certificate files
+        const certificates = [
+            { name: 'ISO Compressed', filename: 'ISO_compressed.pdf' },
+            { name: 'Powellpay', filename: 'Powellpay.pdf' }
+        ];
+
+        // Populate certificates on page load
+        function populateCertificates() {
+            const certificatesGrid = document.getElementById('certificates-grid');
+            certificatesGrid.innerHTML = '';
+            
+            certificates.forEach(cert => {
+                const certCard = document.createElement('div');
+                certCard.className = 'glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer';
+                certCard.innerHTML = `
+                    <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-3xl">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">${cert.name}</h4>
+                    <p class="text-sm text-slate-500 mb-4">Professional certificate</p>
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">View PDF</button>
+                `;
+                
+                certCard.addEventListener('click', () => openCertificateModal(cert));
+                certificatesGrid.appendChild(certCard);
+            });
+        }
+
+        function openDocumentModal(element) {
+            // Get the data-document attribute from the clicked element or its parent
+            let documentType = element.getAttribute('data-document');
+            if (!documentType) {
+                documentType = element.closest('[data-document]')?.getAttribute('data-document');
+            }
+            
+            const doc = documentData[documentType];
+            
+            if (doc) {
+                const modal = document.getElementById('document-modal');
+                const modalTitle = document.getElementById('modal-title');
+                const modalDescription = document.getElementById('modal-description');
+                const pdfViewer = document.getElementById('pdf-viewer');
+                const downloadLink = document.getElementById('download-link');
+                
+                modalTitle.textContent = doc.title;
+                modalDescription.textContent = doc.description;
+                pdfViewer.src = doc.url;
+                downloadLink.href = doc.url;
+                downloadLink.download = doc.url.split('/').pop();
+                
+                modal.classList.remove('hidden');
+            } else {
+                console.log('Document not found:', documentType);
+            }
+        }
+
+        function openCertificateModal(certificate) {
+            const modal = document.getElementById('document-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const downloadLink = document.getElementById('download-link');
+            
+            const certUrl = 'certificates/' + certificate.filename;
+            
+            modalTitle.textContent = certificate.name;
+            modalDescription.textContent = 'Professional certificate';
+            pdfViewer.src = certUrl;
+            downloadLink.href = certUrl;
+            downloadLink.download = certificate.filename;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeDocumentModal() {
+            const modal = document.getElementById('document-modal');
+            modal.classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        const documentModal = document.getElementById('document-modal');
+        documentModal.addEventListener('click', (e) => {
+            if (e.target === documentModal) {
+                closeDocumentModal();
+            }
+        });
+
+        // Initialize certificates on page load
+        document.addEventListener('DOMContentLoaded', populateCertificates);
 
         // WhatsApp Contact Form
         const contactForm = document.getElementById('contact-form');
