@@ -289,23 +289,23 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 reveal max-w-2xl mx-auto">
                 <!-- CV Document -->
-                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="cv">
+                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="cv" onclick="openDocumentModal(this)">
                     <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary text-3xl">
                         <i class="fas fa-file-pdf"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Curriculum Vitae</h3>
                     <p class="text-sm text-slate-500 mb-4">My professional CV and experience</p>
-                    <button type="button" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition" onclick="openDocumentModal(this.parentElement)">View PDF</button>
+                    <button type="button" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">View PDF</button>
                 </div>
 
                 <!-- Academic Results -->
-                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="results">
+                <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition cursor-pointer" data-document="results" onclick="openDocumentModal(this)">
                     <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary text-3xl">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Academic Results</h3>
                     <p class="text-sm text-slate-500 mb-4">University transcripts and grades</p>
-                    <button type="button" class="bg-secondary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition" onclick="openDocumentModal(this.parentElement)">View PDF</button>
+                    <button type="button" class="bg-secondary text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">View PDF</button>
                 </div>
             </div>
 
@@ -466,6 +466,8 @@
         // Populate certificates on page load
         function populateCertificates() {
             const certificatesGrid = document.getElementById('certificates-grid');
+            if (!certificatesGrid) return;
+            
             certificatesGrid.innerHTML = '';
             
             certificates.forEach(cert => {
@@ -477,20 +479,28 @@
                     </div>
                     <h4 class="text-lg font-bold mb-2">${cert.name}</h4>
                     <p class="text-sm text-slate-500 mb-4">Professional certificate</p>
-                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">View PDF</button>
+                    <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">View PDF</button>
                 `;
                 
-                certCard.addEventListener('click', () => openCertificateModal(cert));
+                certCard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openCertificateModal(cert);
+                });
                 certificatesGrid.appendChild(certCard);
             });
         }
 
         function openDocumentModal(element) {
+            // If the element passed is the event, use target
+            if (element.target) element = element.currentTarget || element.target;
+            
             // Get the data-document attribute from the clicked element or its parent
             let documentType = element.getAttribute('data-document');
             if (!documentType) {
                 documentType = element.closest('[data-document]')?.getAttribute('data-document');
             }
+            
+            console.log('Opening document:', documentType); // Debugging
             
             const doc = documentData[documentType];
             
@@ -503,17 +513,26 @@
                 
                 modalTitle.textContent = doc.title;
                 modalDescription.textContent = doc.description;
-                pdfViewer.src = doc.url;
+                
+                // Clear and reset source to ensure it reloads
+                pdfViewer.src = '';
+                setTimeout(() => {
+                    pdfViewer.src = doc.url;
+                }, 10);
+                
                 downloadLink.href = doc.url;
                 downloadLink.download = doc.url.split('/').pop();
                 
                 modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             } else {
-                console.log('Document not found:', documentType);
+                console.error('Document data not found for:', documentType);
             }
         }
 
         function openCertificateModal(certificate) {
+            console.log('Opening certificate:', certificate.name); // Debugging
+            
             const modal = document.getElementById('document-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalDescription = document.getElementById('modal-description');
@@ -524,16 +543,27 @@
             
             modalTitle.textContent = certificate.name;
             modalDescription.textContent = 'Professional certificate';
-            pdfViewer.src = certUrl;
+            
+            // Clear and reset source to ensure it reloads
+            pdfViewer.src = '';
+            setTimeout(() => {
+                pdfViewer.src = certUrl;
+            }, 10);
+            
             downloadLink.href = certUrl;
             downloadLink.download = certificate.filename;
             
             modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
         }
 
         function closeDocumentModal() {
             const modal = document.getElementById('document-modal');
             modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+            
+            // Clear iframe src when closing to stop any background loading
+            document.getElementById('pdf-viewer').src = '';
         }
 
         // Close modal when clicking outside
